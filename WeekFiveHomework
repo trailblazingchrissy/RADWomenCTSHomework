@@ -1,0 +1,112 @@
+public with sharing class WeekFiveHomework {
+    
+	// Remember Sets & Maps??  We did a little practice with Lists in week 2, but we need to make sure we know how to use Sets & Maps as well!!
+	
+    public static void setsReview(){
+
+        //Your assignment: Play with Sets!
+
+        //1.  Create a set of Strings and add at least 5 entries
+        // Declaring and initalizing a list of strings called listofmovies.
+      
+         Set<String> Blackmovies = new Set<String>();
+        
+        //Adding a list of movies to the string
+         Blackmovies.add('Black Panther');
+        Blackmovies.add('Princess and The Frog');
+        Blackmovies.add('Lion King');
+        Blackmovies.add('Coming to America');
+        Blackmovies.add('Friday');
+        //Use System.debug to print out the size of your set
+System.debug('Size of Blackmovies: ' + Blackmovies.size());
+
+        //Add an item to your set that already exists
+Blackmovies.add('Black Panther');
+
+        //Use System.debug to print out the size again,  they should be the same!
+
+System.debug('Size of listOfMovies: ' + Blackmovies.size());
+
+        // 2.  Bonus Points!  Check out the documentation on Sets. Go to the section titled Set Methods. Pick one of the methods to try out and print the results to the debug log.  
+        // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_set.htm
+        //Hint:  can you print out a boolean that indicates if the set is empty?  Can you clone it?
+//creates a new set with 5 entries
+        Set <String> anime = new Set <String> {'Inuyasha', 'Naruto', 'Pokemon', 'Bleach', 'Sailor Moon'};
+        //outputs entries in the set
+        for (String str: anime)
+//outputs an entry
+System.debug('=== entry: '+ str);
+        //returns true if set is empty
+        system.debug('=== is anime set emmpty?' +anime.isEmpty());
+        // clones the set
+        Set <String> cloneanime = anime.clone();
+        for (String str2 : cloneanime)
+            // output entry
+           System.debug('===entry: '+str2);
+            
+    }
+
+    public static void mapsReview () {
+
+        //Time to get creative!  
+
+        // 1. Create a new Map.  You can use whatever primitives/object types you like, as long as they make sense.
+        // Try to add at least 5 Key/value pairs.
+Map<Integer, String> moviesbyreleaseyear = new Map<Integer, String>();
+         moviesbyreleaseyear.put(2018, 'Black Panther');
+        moviesbyreleaseyear.put(2009, 'Princess and The Frog');
+        moviesbyreleaseyear.put(2019, 'Lion King');
+        moviesbyreleaseyear.put(1989, 'Coming to America');
+        moviesbyreleaseyear.put(1995, 'Friday');
+
+        //Now, in the debug log, print out  a list of the values.
+List<String> mapValuesList = moviesbyreleaseyear.values();
+        System.debug('The values in our Map: ' + mapValuesList);
+
+        //Can you print out a set of the Keys?
+
+  Set<Integer> mapKeysSet = moviesbyreleaseyear.keySet();
+        System.debug('The KeySet of our Map: ' + mapKeysSet);
+
+        // 2. Bonus!  Check out the documentation on Maps. Go to the section titled Map Methods.  Manipulate the Map using one of the methods defined in the documentation
+        // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_map.htm
+        // Hint: Can you remove an entry using the key?  Can you clear out the map without deleting it?
+
+        //Creates a new map of football players and their jersey numbers
+        Map<String, Integer> mfootball = new Map <String, integer> {'Russell Willson' =>03, 'Dak Prescott'=>04, 'Tom Brady'=>12,'Cam Newton'=>01,'Richard Sherman'=>25};
+ System.debug('=== all values in the map (as a List): ' + mfootball.values()); 
+        System.debug('=== all keys in the map: ' + mfootball.keySet()); 
+        // remove Dak Prescott from the map
+        mfootball.remove('Dak Prescott'); 
+        System.debug('=== all keys in the map: ' + mfootball.keySet()); 
+        // removes all values from mfootball
+		    mfootball.clear(); 
+        // returns true if mfootball is empty
+		    System.debug('===  mfootball empty? ' + mfootball.isEmpty()); 
+    }
+
+    public static void listsReview() {
+
+        // 1. Create a list of Strings.  Add at least 5 entries to the list, all in one line
+
+  List<String> listOfNintendoCharacters = new List<String>{'Mario', 'Yoshi', 'Zelda', 'Link', 'Kirby'};
+        // 2. Create a second list of Strings and add 5 or more entries to this list.
+
+List<String> listmorenintendocharacters = new List<String>{'Donkey Kong', 'Pikachu', 'Princess Peach', 'Tom Nook', 'Shulk'};
+    
+        //3.  Bonus! Using the documentation on standard List methods from Salesforce, add the items from your first list, to your second list with one command
+        // Documentation: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_list.htm
+        
+    // Combining nintendo characters into one lists
+listmorenintendocharacters.addall(listOfNintendoCharacters);
+
+        //4.  Can you now loop through your combined list and print it to the debug log?  (Hint:  Check the documentation!)
+
+        for (String nintendo : listmorenintendocharacters){
+             System.debug('List all Nintendo Characters: ' + nintendo);
+        }
+    }
+
+
+
+}
