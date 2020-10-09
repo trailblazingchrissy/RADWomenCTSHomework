@@ -19,7 +19,7 @@ public with sharing class WeekEightHomework {
         // for loop while i is less than numberofaccounts
         for (Integer i = 0; i <= numberOfAccounts; i++) {
             
-            // create new account named Chick-fil-a
+            // create new account named Sample Account 1
             Account a = new Account();
             a.Name = 'Sample Account 1 ' + i;
             acctList.add(a);
