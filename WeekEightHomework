@@ -21,7 +21,7 @@ public with sharing class WeekEightHomework {
             
             // create new account named Chick-fil-a
             Account a = new Account();
-            a.Name = 'Sample Account ' + i;
+            a.Name = 'Sample Account 1 ' + i;
             acctList.add(a);
         }
 
