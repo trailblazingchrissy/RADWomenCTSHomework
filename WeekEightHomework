@@ -12,7 +12,7 @@ public with sharing class WeekEightHomework {
     //Add comments to describe what the code is doing.
     //After you get it to compile, run it in execute anonymous and check that it's really working!  Look up your new accounts in your org!
 
-  public static void createSampleAccounts(Decimal numberOfAccounts) {
+  public static void createSampleAccounts(Integer numberOfAccounts) {
 
  //Create a list of accounts for insert 
    List<Account> acctList = new List<Account>();
