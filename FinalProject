@@ -1,0 +1,72 @@
+/**
+ * A Utility class to process Stock Item records from the Stock Item Handler
+ */
+public with sharing class StockItemHandler {
+    
+    /**
+     * Class constructor.
+     */
+    
+    //Exercise 1
+    public StockItemHandler() {}
+    public static void StockItemHandlerBeforeInsert (List <Stock_Item__c> newStockItems){
+        
+        
+        //Creating a set of strings from our list of stock items to search for duplicates. 
+      Set <String> newStockItemset = new Set <String>();
+          
+        //Loop across to add stock item names to a set 
+        for(stock_Item__c newstock: newstockitems){
+            newStockItemset.add(newstock.name);
+        }     
+     //Delcare a list and SOQL to query existing stock items
+        List<Stock_item__c> existingstockitems = [Select Id, Item_Name__c From Stock_Item__c where Item_Name__c in: newStockItemset];
+       //Loops through stock items
+        for (stock_item__c stk : newStockItems){
+       //Extracts the item name to potentially identify duplicates
+            String stockItem = stk.Item_Name__c;
+            //Checks list to see if a duplicate is found. If the size is greater than zero a match was found. 
+        if (existingstockitems.size() >0) {
+            //If duplicate is found, add Duplicate Item to Stock Item Name
+            stk.Item_Name__c =stk.Item_Name__c + 'Duplicate Item'; 
+    
+        }
+            }
+    }
+    //Exercise 2
+    //Creates a method for beforedelete to check to see if a case is needed based on quantity on hand
+    public static void handleBeforeDelete(Decimal CountStockonHand){
+        //Creates a list of Stock items where the stock item on hand is greater than zero 
+        List<Stock_Item__c> stockitemstodelete = [Select id, Item_Name__c, Stock_on_Hand__c from Stock_item__c Where Stock_on_Hand__c >0];    
+        //Checking the records that show on my list.
+        System.debug('These items are showing:'+stockitemstodelete.size());
+        //Creates a list to hold any cases that need to be created 
+        List<Case> casesToInsert = new List<Case>();
+        //Loops through each Stock Item record to see if a case needs to be created. 
+        for(Stock_Item__c si: stockitemstodelete) {
+            //Checking to see records in debug log that makes criteria 
+            System.debug('Stockonhandgreaterthanzero');
+            //Goes through each Stock Item to create a case record if needed 
+            if(si.Stock_on_Hand__c >0){
+            Case cse = new Case();
+            cse.Subject =(si.Item_Name__c + 'will be deleted');
+            cse.OwnerId =si.id;
+            cse.Description=('Quantity on Hand at Deletion'+si.Stock_on_Hand__c);
+            cse.Status = 'New';
+            cse.Origin = 'Web';
+            // add to casestoinsert list 
+            casesToInsert.add(cse);
+        }
+    }
+    }
+    //Exercise 3   
+    public static void GetLowStockItems(){
+        //Query written to find all my low stock items. 
+           List<Stock_Item__c> Lowstockitems = [SELECT Id, Name, Item_Name__c,Item_Stock_is_Low__c,Minimum_Stock_Level__c ,Stock_on_Hand__c  FROM Stock_Item__c WHERE Item_Stock_is_Low__c= True];
+     //Loops through all stock items for previous SOQL query 
+        for (Stock_Item__c sil: Lowstockitems){
+         //Prints results into debug log
+        System.debug('Our Low Stock Items are ' + Lowstockitems);
+          }
+    }
+}
